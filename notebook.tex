@@ -1,0 +1,1354 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{TCP-Congestion-Control}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{TCP - Tahoe, Reno, NewReno,
+SACK}\label{tcp---tahoe-reno-newreno-sack}
+
+    \subsection{TCP Tahoe}\label{tcp-tahoe}
+
+Tahoe variant of TCP consider duplicate ACKs are packet lost event. Once
+sender receive 3 duplicate ACKs which means 4 ACKs for one packet, Tahoe
+start fast retransmit (it does not wait to retransmission timer to
+expire), sets slow start threshold to half of the current congestion
+window size, reduce the congestion window to 1 and reset to slow start.
+
+Once it rech the slow start threshold, with every ACK received it
+increase the congestion window size by one.
+
+    \subsection{TCP Reno}\label{tcp-reno}
+
+Reno variant of TCP use Fast Recovery, Fact Recovery assume that each
+ACK received represents a single packet sent, using this assumption
+sender can estimate the amount of outstanding data.
+
+Like Tahoe, Reno also use duplicate ACKs threshold, if sender receive 3
+dupliate ACKs, it perform the fast retransmit and unlike Tahoe skip the
+slow start.
+
+    \subsection{TCP New Reno}\label{tcp-new-reno}
+
+TCP New Reno is similar to Reno in case on single packet drop,
+difference is when multiple packets are dropped from a window. During
+fast recovery, if partial ack is received for few of the packets, Reno
+takes out TCP from Fast Recovery mode. However, new reno does not out
+TCP out from Fast Recovery and treat it as indicator that the packet
+having sequence after ack is lost. Therefore, new reno retransmit one
+lost packet per rount trip until all lost packet in that window is
+delivered.
+
+New Reno is moved out of Fast Recovery, if it receive ack for all the
+outstanding packets.
+
+    \subsection{TCP SACK}\label{tcp-sack}
+
+During Fast Recovery, SACK maintain a variable called pipe. Pipe
+estimates the outstanding number of packets in the path. If the number
+of packets in the path is less than congestion window size then only
+sender transmit new or retransmit data. Pipe is incremented by one if
+sender sent one or retramit a packet. It decrement by one if sender
+receive duplicate acks.
+
+    \subsection{Simulation}\label{simulation}
+
+For simulation, I have used ns2 script.
+
+    \subsubsection{Network Topology}\label{network-topology}
+
+\begin{verbatim}
+ Create the following topology:             
+          node 0
+            \ 
+    8Mb,.1ms \ 
+              \ 
+      8Mb,.1ms \       0.8Mb,100ms
+ node 1 ------node 3 --------- node 4
+               /
+              /
+    8Mb,.1ms /
+            /
+          node 2
+\end{verbatim}
+
+As shown in above figure, network has 5 nodes
+\texttt{node0,\ node1,\ node2,\ node3\ and\ node4}
+
+\paragraph{Capacity and delay}\label{capacity-and-delay}
+
+\begin{itemize}
+\tightlist
+\item
+  node0 to node3 has 8Mb capacity and 0.1ms of delay
+\item
+  node1 to node3 has 8Mb capacity and 0.1ms of delay
+\item
+  node2 to node3 has 8Mb capacity and 0.1ms of delay
+\item
+  node3 to node4 has 0.8Mb capacity and 100ms of delay
+\end{itemize}
+
+\paragraph{DropTail:}\label{droptail}
+
+Drop tail is used for queue buffer. Drop tail is the simple queueing
+mechanis used by the router to determine when to drop packet. In this
+scenario, each packet is treated as identical and when queue is full to
+its maximum capacity new packet is dropped, until when queue has enough
+space for new packet
+
+\paragraph{ns-script}\label{ns-script}
+
+In the script, three methods are implemented to simulate 1 packet drop,
+2 packet drop and 3 packet drop scenarios.
+
+Each source is made as FTP source and max packet is defined for the
+source to simulate packet drop scenarios.
+
+Source-1 starts packet transfer at 1s timestamp and source-2 starts
+packet transfer at 1.2s timestamp and source-3 starts packet transfer at
+1.18s timestamp.
+
+Script will finish the simulation after 6 secs.
+
+Script is identical for all the TCP variant only different is TCP
+implementation for source node and destination node as follows.
+
+\paragraph{Tahoe}\label{tahoe}
+
+Tahoe is the classic TCP variant, here \texttt{Agent/TCP} is used for
+source and \texttt{Agent/TCPSink} is used for the destination nodes.
+
+\paragraph{Reno}\label{reno}
+
+For Reno TCP, source is defined as \texttt{Agent/TCP/Reno} and
+destination node is same as Tahoe \texttt{Agent/TCPSink}
+
+\paragraph{New Reno}\label{new-reno}
+
+For new reno TCP, source is defined as \texttt{Agent/TCP/Newreno} and
+destination node is same as Tahoe \texttt{Agent/TCPSink}
+
+\paragraph{SACK}\label{sack}
+
+For SACK TCP, source is defined as \texttt{Agent/TCP/Sack1} and
+destination node is defined as \texttt{Agent/TCPSink/Sack1}
+
+    \subsubsection{Execution}\label{execution}
+
+After the script is setup, I have saved 4 scripts based on the source
+and destination variant of TCP as mentioned above.
+
+\begin{itemize}
+\tightlist
+\item
+  tcp\_drop\_tahoe.tcl
+\item
+  tcp\_drop\_reno.tcl
+\item
+  tcp\_drop\_newreno.tcl
+\item
+  tcp\_drop\_sack.tcl
+\end{itemize}
+
+\begin{quote}
+To simulate Tahoe 1-packet drop execute the command
+\texttt{ns\ tcp\_drop\_tahoe.tcl\ 1}
+\end{quote}
+
+\begin{quote}
+To simulate Tahoe 2-packet drop execute the command
+\texttt{ns\ tcp\_drop\_tahoe.tcl\ 2}
+\end{quote}
+
+\begin{quote}
+To simulate Tahoe 3-packet drop execute the command
+\texttt{ns\ tcp\_drop\_tahoe.tcl\ 3}
+\end{quote}
+
+\begin{quote}
+To simulate Reno 1-packet drop execute the command
+\texttt{ns\ tcp\_drop\_reno.tcl\ 1}
+\end{quote}
+
+\begin{quote}
+To simulate Reno 2-packet drop execute the command
+\texttt{ns\ tcp\_drop\_reno.tcl\ 2}
+\end{quote}
+
+\begin{quote}
+To simulate Reno 3-packet drop execute the command
+\texttt{ns\ tcp\_drop\_reno.tcl\ 3}
+\end{quote}
+
+\begin{quote}
+To simulate NewReno 1-packet drop execute the command
+\texttt{ns\ tcp\_drop\_newreno.tcl\ 1}
+\end{quote}
+
+\begin{quote}
+To simulate NewReno 2-packet drop execute the command
+\texttt{ns\ tcp\_drop\_newreno.tcl\ 2}
+\end{quote}
+
+\begin{quote}
+To simulate NewReno 3-packet drop execute the command
+\texttt{ns\ tcp\_drop\_newreno.tcl\ 3}
+\end{quote}
+
+\begin{quote}
+To simulate SACK 1-packet drop execute the command
+\texttt{ns\ tcp\_drop\_sack.tcl\ 1}
+\end{quote}
+
+\begin{quote}
+To simulate SACK 2-packet drop execute the command
+\texttt{ns\ tcp\_drop\_sack.tcl\ 2}
+\end{quote}
+
+\begin{quote}
+To simulate SACK 3-packet drop execute the command
+\texttt{ns\ tcp\_drop\_sack.tcl\ 3}
+\end{quote}
+
+After execution of the script, it generates \texttt{out.tr} file. This
+is the trace file contains logs about the packet transmission.
+
+Each line in out.trace contains following information
+
+\begin{itemize}
+\tightlist
+\item
+  state of the packet
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{r} : receive; packet is received at the destination node
+  \item
+    \texttt{+} : enqueue; packet is enqueue in the queue buffer
+  \item
+    \texttt{-} : dequeue; packet is dequeue from the queue buffer
+  \item
+    \texttt{d} : drop; packet is dropped
+  \end{itemize}
+\item
+  timestamp
+\item
+  source node
+\item
+  destination node
+\item
+  type : if the packet is \textbf{\emph{tcp}} or \textbf{\emph{ack}}
+  packet
+\item
+  size : packet size
+\item
+  flag information
+\item
+  ip address of source node
+\item
+  ip address of destination node
+\item
+  packet sequence number
+\item
+  packet id
+\end{itemize}
+
+    \subsection{Analysis}\label{analysis}
+
+Below the script to extract information from the \texttt{out.tr} file
+and analyse the simulation
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}194}]:} \PY{c+c1}{\PYZsh{} import necessary libraries}
+          \PY{k+kn}{import} \PY{n+nn}{sys}
+          \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+          \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline 
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}195}]:} \PY{c+c1}{\PYZsh{} define consts}
+          
+          \PY{n}{RECEIVE} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}
+          \PY{n}{ENQUEUE} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{+}\PY{l+s+s1}{\PYZsq{}}
+          \PY{n}{DEQUEUE} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}
+          \PY{n}{DROP} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{d}\PY{l+s+s1}{\PYZsq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}196}]:} \PY{c+c1}{\PYZsh{} extract the information for the trace line}
+          \PY{k}{def} \PY{n+nf}{process\PYZus{}trace}\PY{p}{(}\PY{n}{trace\PYZus{}line}\PY{p}{)}\PY{p}{:}
+              \PY{n}{tr\PYZus{}map} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+              \PY{n}{tr} \PY{o}{=} \PY{n}{trace\PYZus{}line}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+              \PY{n}{tr\PYZus{}map}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{state}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{tr}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+              \PY{n}{tr\PYZus{}map}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ts}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{tr}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+              \PY{n}{tr\PYZus{}map}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{from}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{tr}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
+              \PY{n}{tr\PYZus{}map}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{to}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{tr}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}
+              \PY{n}{tr\PYZus{}map}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{tr}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}
+              \PY{n}{tr\PYZus{}map}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{tr}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]}
+              \PY{n}{tr\PYZus{}map}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{from\PYZus{}ip}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{tr}\PY{p}{[}\PY{l+m+mi}{8}\PY{p}{]}
+              \PY{n}{tr\PYZus{}map}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{to\PYZus{}ip}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{tr}\PY{p}{[}\PY{l+m+mi}{9}\PY{p}{]}
+              \PY{n}{tr\PYZus{}map}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{seq\PYZus{}num}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{tr}\PY{p}{[}\PY{l+m+mi}{10}\PY{p}{]}
+              \PY{n}{tr\PYZus{}map}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pkt\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{tr}\PY{p}{[}\PY{l+m+mi}{11}\PY{p}{]}
+          
+              \PY{k}{return} \PY{n}{tr\PYZus{}map}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}197}]:} \PY{c+c1}{\PYZsh{} extract out information from all the log present in out.tr}
+          \PY{k}{def} \PY{n+nf}{get\PYZus{}traces}\PY{p}{(}\PY{n}{filename}\PY{p}{)}\PY{p}{:}
+              \PY{c+c1}{\PYZsh{} open trace file}
+              \PY{n}{trace\PYZus{}file} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{n}{filename}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{r}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+              \PY{n}{traces} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+              \PY{k}{for} \PY{n}{trace} \PY{o+ow}{in} \PY{n}{trace\PYZus{}file}\PY{p}{:}
+                  \PY{n}{tr} \PY{o}{=} \PY{n}{process\PYZus{}trace}\PY{p}{(}\PY{n}{trace}\PY{o}{.}\PY{n}{rstrip}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                  \PY{n}{traces}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{tr}\PY{p}{)}
+              \PY{k}{return} \PY{n}{traces}
+\end{Verbatim}
+
+
+    \subsubsection{Analysis}\label{analysis}
+
+\textbf{\emph{Total time simulation run :}} Total time the simulation is
+executed.
+
+\textbf{\emph{Total number of packets recevied by destination node
+(node-4) :}} Total number of packets received by destination node.
+
+\textbf{\emph{Packets per sec from node-3 to node-4 :}} Total number of
+packets received by destination per second ie total number of packet
+recieved by destination divided by total time run.
+
+\textbf{\emph{Total Data passed from node-3 to node-4 :}} Per packet
+size id 1040, therefore, total data passed is the number of packets
+multipled by 1040.
+
+\textbf{\emph{Data per sec :}} like packets per sec, this is total data
+passed divided by the total time run.
+
+\textbf{\emph{Packets from source (node-0) to destination (node-4) :}}
+Total packets through from source to destination.
+
+\textbf{\emph{Packets/sec from source (node-0) to destination (node-4)
+:}} Packets through from source to destination per second (divided by
+total time run).
+
+\textbf{\emph{Data from source (node-0) to destination (node-4) :}} Data
+passed through source to destination
+
+\textbf{\emph{Data per sec from source (node-0) to destination (node-4)
+:}} Data transmitted from source to destination per second.
+
+\textbf{\emph{Average delay from source (node-0) to destination (node-1)
+:}} It the difference between the time packet is enqueue in source node
+and received at the destination node.
+
+\textbf{\emph{Average Round Trip Time for a packet froms source (node-0)
+to destination (node-1) :}} It is the round trip time, time difference
+between the packet is enqueued in source and ack is received back to
+source node.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}198}]:} \PY{k}{def} \PY{n+nf}{total\PYZus{}through}\PY{p}{(}\PY{n}{trace\PYZus{}map}\PY{p}{)}\PY{p}{:}
+              \PY{n}{rec} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+              \PY{n}{enq} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+              \PY{n}{ack} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+              
+              \PY{k}{for} \PY{n}{tr} \PY{o+ow}{in} \PY{n}{trace\PYZus{}map}\PY{p}{:}
+                  \PY{k}{if} \PY{p}{(}\PY{n}{tr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{state}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{n}{RECEIVE} \PY{o+ow}{and} 
+                      \PY{n}{tr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{from}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{and}
+                      \PY{n}{tr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{to}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{4}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{and}
+                      \PY{n}{tr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tcp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{rec}\PY{p}{[}\PY{n}{tr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{seq\PYZus{}num}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{tr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ts}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                  
+                  \PY{k}{if} \PY{p}{(}\PY{n}{tr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{state}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{ENQUEUE} \PY{o+ow}{and}
+                      \PY{n}{tr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{from}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{and}
+                      \PY{n}{tr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{to}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{and}
+                      \PY{n}{tr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tcp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{enq}\PY{p}{[}\PY{n}{tr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{seq\PYZus{}num}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}  \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{tr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ts}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          
+                  \PY{k}{if} \PY{p}{(}\PY{n}{tr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{state}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{RECEIVE} \PY{o+ow}{and}
+                      \PY{n}{tr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{from}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{and}
+                      \PY{n}{tr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{to}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{and}
+                      \PY{n}{tr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ack}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{ack}\PY{p}{[}\PY{n}{tr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{seq\PYZus{}num}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{tr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ts}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                      
+                      
+              \PY{n}{start\PYZus{}time} \PY{o}{=} \PY{n+nb}{min}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{enq}\PY{o}{.}\PY{n}{values}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+              \PY{n}{end\PYZus{}time} \PY{o}{=} \PY{n+nb}{max}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{enq}\PY{o}{.}\PY{n}{values}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{p}{)}
+              
+              \PY{n}{total\PYZus{}time} \PY{o}{=} \PY{n}{end\PYZus{}time} \PY{o}{\PYZhy{}} \PY{n}{start\PYZus{}time}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Total time simulation run : }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{total\PYZus{}time}\PY{p}{)}
+                      
+              \PY{n}{total\PYZus{}pkts} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{rec}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Total number of packets recevied by destination node (node\PYZhy{}4) : }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{total\PYZus{}pkts}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Packets per sec from node\PYZhy{}3 to node\PYZhy{}4 : }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{total\PYZus{}pkts}\PY{o}{/}\PY{n}{total\PYZus{}time}\PY{p}{)}
+              
+              \PY{n}{total\PYZus{}data} \PY{o}{=} \PY{n}{total\PYZus{}pkts} \PY{o}{*} \PY{l+m+mi}{1040} \PY{c+c1}{\PYZsh{}size of one pkt}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Total Data passed from node\PYZhy{}3 to node\PYZhy{}4 : }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{total\PYZus{}data}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data per sec : }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{total\PYZus{}data}\PY{o}{/}\PY{n}{total\PYZus{}time}\PY{p}{)}
+              
+              \PY{c+c1}{\PYZsh{}totak pkts from node\PYZhy{}0 to node\PYZhy{}4}
+              \PY{n}{total\PYZus{}pkts\PYZus{}node\PYZus{}0} \PY{o}{=} \PY{l+m+mi}{0}
+              \PY{k}{for} \PY{n}{pkt} \PY{o+ow}{in} \PY{n}{enq}\PY{p}{:}
+                  \PY{k}{if} \PY{n}{pkt} \PY{o+ow}{in} \PY{n}{rec}\PY{p}{:}
+                      \PY{n}{total\PYZus{}pkts\PYZus{}node\PYZus{}0} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                      
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Packets from source (node\PYZhy{}0) to destination (node\PYZhy{}4) : }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{total\PYZus{}pkts\PYZus{}node\PYZus{}0}\PY{p}{)}    
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Packets/sec from source (node\PYZhy{}0) to destination (node\PYZhy{}4) : }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{total\PYZus{}pkts\PYZus{}node\PYZus{}0}\PY{o}{/}\PY{n}{total\PYZus{}time}\PY{p}{)}
+                  
+              
+              \PY{n}{total\PYZus{}data\PYZus{}node\PYZus{}0} \PY{o}{=} \PY{n}{total\PYZus{}pkts\PYZus{}node\PYZus{}0} \PY{o}{*} \PY{l+m+mi}{1040}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data from source (node\PYZhy{}0) to destination (node\PYZhy{}4) : }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{total\PYZus{}data\PYZus{}node\PYZus{}0}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data/sec from source (node\PYZhy{}0) to destination (node\PYZhy{}4) : }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{total\PYZus{}data\PYZus{}node\PYZus{}0}\PY{o}{/}\PY{n}{total\PYZus{}time}\PY{p}{)}
+              
+              \PY{c+c1}{\PYZsh{}avg delay from node\PYZhy{}0 to node\PYZhy{}4}
+              \PY{n}{delay} \PY{o}{=} \PY{l+m+mi}{0}
+              \PY{n}{delay\PYZus{}count} \PY{o}{=} \PY{l+m+mi}{0}
+              \PY{k}{for} \PY{n}{pkt} \PY{o+ow}{in} \PY{n}{enq}\PY{p}{:}
+                  \PY{k}{if} \PY{n}{pkt} \PY{o+ow}{in} \PY{n}{rec}\PY{p}{:}
+                      \PY{n}{delay} \PY{o}{=} \PY{n}{delay} \PY{o}{+} \PY{p}{(}\PY{n}{rec}\PY{p}{[}\PY{n}{pkt}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{enq}\PY{p}{[}\PY{n}{pkt}\PY{p}{]}\PY{p}{)}
+                      \PY{n}{delay\PYZus{}count} \PY{o}{=} \PY{n}{delay\PYZus{}count} \PY{o}{+} \PY{l+m+mi}{1}
+              \PY{n}{avg\PYZus{}delay} \PY{o}{=} \PY{n}{delay}\PY{o}{/}\PY{n}{delay\PYZus{}count}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Average delay from source (node\PYZhy{}0) to destination (node\PYZhy{}1) : }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{avg\PYZus{}delay}\PY{p}{)}
+              
+              \PY{c+c1}{\PYZsh{}avg RTT for a packet from node\PYZhy{}0 to node\PYZhy{}4 and ack back to node\PYZhy{}0}
+              \PY{n}{rtt} \PY{o}{=} \PY{l+m+mi}{0}
+              \PY{n}{rtt\PYZus{}count} \PY{o}{=} \PY{l+m+mi}{0}
+              \PY{k}{for} \PY{n}{pkt} \PY{o+ow}{in} \PY{n}{enq}\PY{p}{:}
+                  \PY{k}{if} \PY{n}{pkt} \PY{o+ow}{in} \PY{n}{ack}\PY{p}{:}
+                      \PY{n}{rtt} \PY{o}{=} \PY{n}{rtt} \PY{o}{+} \PY{p}{(}\PY{n}{ack}\PY{p}{[}\PY{n}{pkt}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{enq}\PY{p}{[}\PY{n}{pkt}\PY{p}{]}\PY{p}{)}
+                      \PY{n}{rtt\PYZus{}count} \PY{o}{=} \PY{n}{rtt\PYZus{}count} \PY{o}{+} \PY{l+m+mi}{1}
+              \PY{n}{avg\PYZus{}rtt} \PY{o}{=} \PY{n}{rtt}\PY{o}{/}\PY{n}{rtt\PYZus{}count}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Average Round Trip Time for a packet froms source (node\PYZhy{}0) to destination (node\PYZhy{}1) : }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{avg\PYZus{}rtt}\PY{p}{)}
+              
+              \PY{k}{return} \PY{p}{(}\PY{n}{total\PYZus{}pkts}\PY{p}{,} \PY{n}{total\PYZus{}pkts\PYZus{}node\PYZus{}0}\PY{p}{,} \PY{n}{avg\PYZus{}delay}\PY{p}{,} \PY{n}{avg\PYZus{}rtt}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{Plot}\label{plot}
+
+Plot the summary of packet delay and packet drop
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}199}]:} \PY{k}{def} \PY{n+nf}{plot}\PY{p}{(}\PY{n}{traces}\PY{p}{)}\PY{p}{:}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+              \PY{n}{enq} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+              \PY{n}{ack} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+              \PY{n}{drop} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+          
+              \PY{k}{for} \PY{n}{tr} \PY{o+ow}{in} \PY{n}{traces}\PY{p}{:}
+                  \PY{k}{if} \PY{p}{(}\PY{n}{tr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{state}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{ENQUEUE} \PY{o+ow}{and}
+                      \PY{n}{tr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{from}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{and}
+                      \PY{n}{tr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{to}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{and}
+                      \PY{n}{tr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tcp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{enq}\PY{p}{[}\PY{n}{tr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{seq\PYZus{}num}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}  \PY{o}{=} \PY{n}{tr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ts}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          
+                  \PY{k}{if} \PY{p}{(}\PY{n}{tr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{state}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{RECEIVE} \PY{o+ow}{and}
+                      \PY{n}{tr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{from}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{and}
+                      \PY{n}{tr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{to}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{and}
+                      \PY{n}{tr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ack}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{ack}\PY{p}{[}\PY{n}{tr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{seq\PYZus{}num}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{n}{tr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ts}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                      
+                  \PY{k}{if} \PY{p}{(}\PY{n}{tr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{state}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{DROP} \PY{o+ow}{and}
+                      \PY{n}{tr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{from}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{and}
+                      \PY{n}{tr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{to}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{4}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{and}
+                      \PY{n}{tr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tcp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{drop}\PY{p}{[}\PY{n}{tr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{seq\PYZus{}num}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{n}{tr}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ts}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+              
+              \PY{n}{e\PYZus{}seq}\PY{p}{,} \PY{n}{e\PYZus{}ts} \PY{o}{=} \PY{n+nb}{zip}\PY{p}{(}\PY{o}{*}\PY{n+nb}{sorted}\PY{p}{(}\PY{n}{enq}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+              \PY{n}{e\PYZus{}seq} \PY{o}{=} \PY{p}{[}\PY{n+nb}{float}\PY{p}{(}\PY{n}{item}\PY{p}{)}\PY{o}{\PYZpc{}}\PY{k}{50} for item in e\PYZus{}seq]
+              \PY{n}{e\PYZus{}ts} \PY{o}{=} \PY{p}{[}\PY{n+nb}{float}\PY{p}{(}\PY{n}{item}\PY{p}{)} \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n}{e\PYZus{}ts}\PY{p}{]}
+              
+              \PY{n}{a\PYZus{}seq}\PY{p}{,} \PY{n}{a\PYZus{}ts} \PY{o}{=} \PY{n+nb}{zip}\PY{p}{(}\PY{o}{*}\PY{n+nb}{sorted}\PY{p}{(}\PY{n}{ack}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+              \PY{n}{a\PYZus{}seq} \PY{o}{=} \PY{p}{[}\PY{n+nb}{float}\PY{p}{(}\PY{n}{item}\PY{p}{)}\PY{o}{\PYZpc{}}\PY{k}{50} for item in a\PYZus{}seq]
+              \PY{n}{a\PYZus{}ts} \PY{o}{=} \PY{p}{[}\PY{n+nb}{float}\PY{p}{(}\PY{n}{item}\PY{p}{)} \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n}{a\PYZus{}ts}\PY{p}{]}
+              
+              \PY{n}{d\PYZus{}seq}\PY{p}{,} \PY{n}{d\PYZus{}ts} \PY{o}{=} \PY{n+nb}{zip}\PY{p}{(}\PY{o}{*}\PY{n+nb}{sorted}\PY{p}{(}\PY{n}{drop}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+              \PY{n}{d\PYZus{}seq} \PY{o}{=} \PY{p}{[}\PY{n+nb}{float}\PY{p}{(}\PY{n}{item}\PY{p}{)}\PY{o}{\PYZpc{}}\PY{k}{50} for item in d\PYZus{}seq]
+              \PY{n}{d\PYZus{}ts} \PY{o}{=} \PY{p}{[}\PY{n+nb}{float}\PY{p}{(}\PY{n}{item}\PY{p}{)} \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n}{d\PYZus{}ts}\PY{p}{]}
+          
+              \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{e\PYZus{}ts}\PY{p}{,} \PY{n}{e\PYZus{}seq}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{green}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{receive}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{a\PYZus{}ts}\PY{p}{,} \PY{n}{a\PYZus{}seq}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ack}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{d\PYZus{}ts}\PY{p}{,} \PY{n}{d\PYZus{}seq}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{drop}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              
+              \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{upper left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              
+              \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}200}]:} \PY{n}{total\PYZus{}pkts} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+                        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+                        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+                        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{\PYZcb{}}
+          
+          \PY{n}{pkts\PYZus{}src\PYZus{}dest} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+                        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+                        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+                        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{\PYZcb{}}
+          
+          \PY{n}{avg\PYZus{}delay} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+                        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+                        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+                        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{\PYZcb{}}
+          
+          \PY{n}{avg\PYZus{}rtt} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+                        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+                        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+                        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}201}]:} \PY{c+c1}{\PYZsh{} read the tahoe one packet drop trace}
+          \PY{n}{tahoe\PYZus{}drop\PYZus{}1} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./tahoe/pkt\PYZus{}drop\PYZus{}1/out.tr}\PY{l+s+s1}{\PYZsq{}}
+          \PY{n}{traces\PYZus{}tahoe\PYZus{}drop\PYZus{}1} \PY{o}{=} \PY{n}{get\PYZus{}traces}\PY{p}{(}\PY{n}{tahoe\PYZus{}drop\PYZus{}1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}202}]:} \PY{n}{total\PYZus{}pkts}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{pkts\PYZus{}src\PYZus{}dest}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{avg\PYZus{}delay}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{avg\PYZus{}rtt}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{total\PYZus{}through}\PY{p}{(}\PY{n}{traces\PYZus{}tahoe\PYZus{}drop\PYZus{}1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Total time simulation run :  4.98996
+Total number of packets recevied by destination node (node-4) :  229
+Packets per sec from node-3 to node-4 :  45.8921514400917
+Total Data passed from node-3 to node-4 :  238160
+Data per sec :  47727.83749769537
+Packets from source (node-0) to destination (node-4) :  229
+Packets/sec from source (node-0) to destination (node-4) :  45.8921514400917
+Data from source (node-0) to destination (node-4) :  238160
+Data/sec from source (node-0) to destination (node-4) :  47727.83749769537
+Average delay from source (node-0) to destination (node-1) :  0.1305211353711791
+Average Round Trip Time for a packet froms source (node-0) to destination (node-1) :  0.22135704433497547
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}203}]:} \PY{n}{plot}\PY{p}{(}\PY{n}{traces\PYZus{}tahoe\PYZus{}drop\PYZus{}1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Tahoe two packets drop}\label{tahoe-two-packets-drop}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}204}]:} \PY{c+c1}{\PYZsh{} read the tahoe one packet drop trace}
+          \PY{n}{tahoe\PYZus{}drop\PYZus{}2} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./tahoe/pkt\PYZus{}drop\PYZus{}2/out.tr}\PY{l+s+s1}{\PYZsq{}}
+          \PY{n}{traces\PYZus{}tahoe\PYZus{}drop\PYZus{}2} \PY{o}{=} \PY{n}{get\PYZus{}traces}\PY{p}{(}\PY{n}{tahoe\PYZus{}drop\PYZus{}2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}205}]:} \PY{n}{total\PYZus{}pkts}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{pkts\PYZus{}src\PYZus{}dest}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{avg\PYZus{}delay}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{avg\PYZus{}rtt}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{total\PYZus{}through}\PY{p}{(}\PY{n}{traces\PYZus{}tahoe\PYZus{}drop\PYZus{}2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Total time simulation run :  4.98996
+Total number of packets recevied by destination node (node-4) :  224
+Packets per sec from node-3 to node-4 :  44.89013939991503
+Total Data passed from node-3 to node-4 :  232960
+Data per sec :  46685.74497591163
+Packets from source (node-0) to destination (node-4) :  224
+Packets/sec from source (node-0) to destination (node-4) :  44.89013939991503
+Data from source (node-0) to destination (node-4) :  232960
+Data/sec from source (node-0) to destination (node-4) :  46685.74497591163
+Average delay from source (node-0) to destination (node-1) :  0.13057339285714278
+Average Round Trip Time for a packet froms source (node-0) to destination (node-1) :  0.2225252261306535
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}206}]:} \PY{n}{plot}\PY{p}{(}\PY{n}{traces\PYZus{}tahoe\PYZus{}drop\PYZus{}2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_24_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Tahoe three packet drop}\label{tahoe-three-packet-drop}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}207}]:} \PY{c+c1}{\PYZsh{} read the tahoe one packet drop trace}
+          \PY{n}{tahoe\PYZus{}drop\PYZus{}3} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./tahoe/pkt\PYZus{}drop\PYZus{}3/out.tr}\PY{l+s+s1}{\PYZsq{}}
+          \PY{n}{traces\PYZus{}tahoe\PYZus{}drop\PYZus{}3} \PY{o}{=} \PY{n}{get\PYZus{}traces}\PY{p}{(}\PY{n}{tahoe\PYZus{}drop\PYZus{}3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}208}]:} \PY{n}{total\PYZus{}pkts}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{pkts\PYZus{}src\PYZus{}dest}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{avg\PYZus{}delay}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{avg\PYZus{}rtt}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{n}{total\PYZus{}through}\PY{p}{(}\PY{n}{traces\PYZus{}tahoe\PYZus{}drop\PYZus{}3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Total time simulation run :  4.99076
+Total number of packets recevied by destination node (node-4) :  214
+Packets per sec from node-3 to node-4 :  42.8792408370669
+Total Data passed from node-3 to node-4 :  222560
+Data per sec :  44594.41047054958
+Packets from source (node-0) to destination (node-4) :  214
+Packets/sec from source (node-0) to destination (node-4) :  42.8792408370669
+Data from source (node-0) to destination (node-4) :  222560
+Data/sec from source (node-0) to destination (node-4) :  44594.41047054958
+Average delay from source (node-0) to destination (node-1) :  0.1328927102803738
+Average Round Trip Time for a packet froms source (node-0) to destination (node-1) :  0.22301536842105252
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}209}]:} \PY{n}{plot}\PY{p}{(}\PY{n}{traces\PYZus{}tahoe\PYZus{}drop\PYZus{}3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Reno one packet drop}\label{reno-one-packet-drop}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}210}]:} \PY{c+c1}{\PYZsh{} read the tahoe one packet drop trace}
+          \PY{n}{reno\PYZus{}drop\PYZus{}1} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./reno/pkt\PYZus{}drop\PYZus{}1/out.tr}\PY{l+s+s1}{\PYZsq{}}
+          \PY{n}{traces\PYZus{}reno\PYZus{}drop\PYZus{}1} \PY{o}{=} \PY{n}{get\PYZus{}traces}\PY{p}{(}\PY{n}{reno\PYZus{}drop\PYZus{}1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}211}]:} \PY{n}{total\PYZus{}pkts}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{pkts\PYZus{}src\PYZus{}dest}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{avg\PYZus{}delay}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{avg\PYZus{}rtt}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{total\PYZus{}through}\PY{p}{(}\PY{n}{traces\PYZus{}reno\PYZus{}drop\PYZus{}1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Total time simulation run :  4.9922
+Total number of packets recevied by destination node (node-4) :  284
+Packets per sec from node-3 to node-4 :  56.88874644445334
+Total Data passed from node-3 to node-4 :  295360
+Data per sec :  59164.29630223148
+Packets from source (node-0) to destination (node-4) :  284
+Packets/sec from source (node-0) to destination (node-4) :  56.88874644445334
+Data from source (node-0) to destination (node-4) :  295360
+Data/sec from source (node-0) to destination (node-4) :  59164.29630223148
+Average delay from source (node-0) to destination (node-1) :  0.12665760563380257
+Average Round Trip Time for a packet froms source (node-0) to destination (node-1) :  0.21852480620155051
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}212}]:} \PY{n}{plot}\PY{p}{(}\PY{n}{traces\PYZus{}reno\PYZus{}drop\PYZus{}1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_32_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Reno two packets drop}\label{reno-two-packets-drop}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}213}]:} \PY{c+c1}{\PYZsh{} read the tahoe one packet drop trace}
+          \PY{n}{reno\PYZus{}drop\PYZus{}2} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./reno/pkt\PYZus{}drop\PYZus{}2/out.tr}\PY{l+s+s1}{\PYZsq{}}
+          \PY{n}{traces\PYZus{}reno\PYZus{}drop\PYZus{}2} \PY{o}{=} \PY{n}{get\PYZus{}traces}\PY{p}{(}\PY{n}{reno\PYZus{}drop\PYZus{}2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}214}]:} \PY{n}{total\PYZus{}pkts}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{pkts\PYZus{}src\PYZus{}dest}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{avg\PYZus{}delay}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{avg\PYZus{}rtt}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{total\PYZus{}through}\PY{p}{(}\PY{n}{traces\PYZus{}reno\PYZus{}drop\PYZus{}2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Total time simulation run :  4.92772
+Total number of packets recevied by destination node (node-4) :  141
+Packets per sec from node-3 to node-4 :  28.613638761942642
+Total Data passed from node-3 to node-4 :  146640
+Data per sec :  29758.184312420348
+Packets from source (node-0) to destination (node-4) :  141
+Packets/sec from source (node-0) to destination (node-4) :  28.613638761942642
+Data from source (node-0) to destination (node-4) :  146640
+Data/sec from source (node-0) to destination (node-4) :  29758.184312420348
+Average delay from source (node-0) to destination (node-1) :  0.13934340425531908
+Average Round Trip Time for a packet froms source (node-0) to destination (node-1) :  0.23185477477477517
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}215}]:} \PY{n}{plot}\PY{p}{(}\PY{n}{traces\PYZus{}reno\PYZus{}drop\PYZus{}2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Reno three packets drop}\label{reno-three-packets-drop}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}216}]:} \PY{c+c1}{\PYZsh{} read the tahoe one packet drop trace}
+          \PY{n}{reno\PYZus{}drop\PYZus{}3} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./reno/pkt\PYZus{}drop\PYZus{}3/out.tr}\PY{l+s+s1}{\PYZsq{}}
+          \PY{n}{traces\PYZus{}reno\PYZus{}drop\PYZus{}3} \PY{o}{=} \PY{n}{get\PYZus{}traces}\PY{p}{(}\PY{n}{reno\PYZus{}drop\PYZus{}3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}217}]:} \PY{n}{total\PYZus{}pkts}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{pkts\PYZus{}src\PYZus{}dest}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{avg\PYZus{}delay}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{avg\PYZus{}rtt}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{n}{total\PYZus{}through}\PY{p}{(}\PY{n}{traces\PYZus{}reno\PYZus{}drop\PYZus{}3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Total time simulation run :  4.91852
+Total number of packets recevied by destination node (node-4) :  139
+Packets per sec from node-3 to node-4 :  28.260533656465768
+Total Data passed from node-3 to node-4 :  144560
+Data per sec :  29390.955002724397
+Packets from source (node-0) to destination (node-4) :  139
+Packets/sec from source (node-0) to destination (node-4) :  28.260533656465768
+Data from source (node-0) to destination (node-4) :  144560
+Data/sec from source (node-0) to destination (node-4) :  29390.955002724397
+Average delay from source (node-0) to destination (node-1) :  0.1402240287769783
+Average Round Trip Time for a packet froms source (node-0) to destination (node-1) :  0.24129477477477515
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}218}]:} \PY{n}{plot}\PY{p}{(}\PY{n}{traces\PYZus{}reno\PYZus{}drop\PYZus{}3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_40_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Newreno one packet drop}\label{newreno-one-packet-drop}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}219}]:} \PY{c+c1}{\PYZsh{} read the tahoe one packet drop trace}
+          \PY{n}{newreno\PYZus{}drop\PYZus{}1} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./newreno/pkt\PYZus{}drop\PYZus{}1/out.tr}\PY{l+s+s1}{\PYZsq{}}
+          \PY{n}{traces\PYZus{}newreno\PYZus{}drop\PYZus{}1} \PY{o}{=} \PY{n}{get\PYZus{}traces}\PY{p}{(}\PY{n}{newreno\PYZus{}drop\PYZus{}1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}220}]:} \PY{n}{total\PYZus{}pkts}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{pkts\PYZus{}src\PYZus{}dest}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{avg\PYZus{}delay}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{avg\PYZus{}rtt}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{total\PYZus{}through}\PY{p}{(}\PY{n}{traces\PYZus{}newreno\PYZus{}drop\PYZus{}1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Total time simulation run :  4.9922
+Total number of packets recevied by destination node (node-4) :  284
+Packets per sec from node-3 to node-4 :  56.88874644445334
+Total Data passed from node-3 to node-4 :  295360
+Data per sec :  59164.29630223148
+Packets from source (node-0) to destination (node-4) :  284
+Packets/sec from source (node-0) to destination (node-4) :  56.88874644445334
+Data from source (node-0) to destination (node-4) :  295360
+Data/sec from source (node-0) to destination (node-4) :  59164.29630223148
+Average delay from source (node-0) to destination (node-1) :  0.12665760563380257
+Average Round Trip Time for a packet froms source (node-0) to destination (node-1) :  0.21852480620155051
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}221}]:} \PY{n}{plot}\PY{p}{(}\PY{n}{traces\PYZus{}newreno\PYZus{}drop\PYZus{}1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_44_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Newreno two packets drop}\label{newreno-two-packets-drop}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}222}]:} \PY{c+c1}{\PYZsh{} read the tahoe one packet drop trace}
+          \PY{n}{newreno\PYZus{}drop\PYZus{}2} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./newreno/pkt\PYZus{}drop\PYZus{}2/out.tr}\PY{l+s+s1}{\PYZsq{}}
+          \PY{n}{traces\PYZus{}newreno\PYZus{}drop\PYZus{}2} \PY{o}{=} \PY{n}{get\PYZus{}traces}\PY{p}{(}\PY{n}{newreno\PYZus{}drop\PYZus{}2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}223}]:} \PY{n}{total\PYZus{}pkts}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{pkts\PYZus{}src\PYZus{}dest}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{avg\PYZus{}delay}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{avg\PYZus{}rtt}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{total\PYZus{}through}\PY{p}{(}\PY{n}{traces\PYZus{}newreno\PYZus{}drop\PYZus{}2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Total time simulation run :  4.99628
+Total number of packets recevied by destination node (node-4) :  268
+Packets per sec from node-3 to node-4 :  53.63990809162017
+Total Data passed from node-3 to node-4 :  278720
+Data per sec :  55785.50441528497
+Packets from source (node-0) to destination (node-4) :  268
+Packets/sec from source (node-0) to destination (node-4) :  53.63990809162017
+Data from source (node-0) to destination (node-4) :  278720
+Data/sec from source (node-0) to destination (node-4) :  55785.50441528497
+Average delay from source (node-0) to destination (node-1) :  0.12733656716417913
+Average Round Trip Time for a packet froms source (node-0) to destination (node-1) :  0.22037831932773103
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}224}]:} \PY{n}{plot}\PY{p}{(}\PY{n}{traces\PYZus{}newreno\PYZus{}drop\PYZus{}2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_48_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Newreno 3 packets drop}\label{newreno-3-packets-drop}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}225}]:} \PY{c+c1}{\PYZsh{} read the tahoe one packet drop trace}
+          \PY{n}{newreno\PYZus{}drop\PYZus{}3} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./newreno/pkt\PYZus{}drop\PYZus{}3/out.tr}\PY{l+s+s1}{\PYZsq{}}
+          \PY{n}{traces\PYZus{}newreno\PYZus{}drop\PYZus{}3} \PY{o}{=} \PY{n}{get\PYZus{}traces}\PY{p}{(}\PY{n}{newreno\PYZus{}drop\PYZus{}3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}226}]:} \PY{n}{total\PYZus{}pkts}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{pkts\PYZus{}src\PYZus{}dest}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{avg\PYZus{}delay}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{avg\PYZus{}rtt}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{n}{total\PYZus{}through}\PY{p}{(}\PY{n}{traces\PYZus{}newreno\PYZus{}drop\PYZus{}3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Total time simulation run :  4.99076
+Total number of packets recevied by destination node (node-4) :  252
+Packets per sec from node-3 to node-4 :  50.49331163991056
+Total Data passed from node-3 to node-4 :  262080
+Data per sec :  52513.044105506975
+Packets from source (node-0) to destination (node-4) :  252
+Packets/sec from source (node-0) to destination (node-4) :  50.49331163991056
+Data from source (node-0) to destination (node-4) :  262080
+Data/sec from source (node-0) to destination (node-4) :  52513.044105506975
+Average delay from source (node-0) to destination (node-1) :  0.12843476190476177
+Average Round Trip Time for a packet froms source (node-0) to destination (node-1) :  0.22377881278538808
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}227}]:} \PY{n}{plot}\PY{p}{(}\PY{n}{traces\PYZus{}newreno\PYZus{}drop\PYZus{}3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_52_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{SACK 1 packet drop}\label{sack-1-packet-drop}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}228}]:} \PY{c+c1}{\PYZsh{} read the tahoe one packet drop trace}
+          \PY{n}{sack\PYZus{}drop\PYZus{}1} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./sack/pkt\PYZus{}drop\PYZus{}1/out.tr}\PY{l+s+s1}{\PYZsq{}}
+          \PY{n}{traces\PYZus{}sack\PYZus{}drop\PYZus{}1} \PY{o}{=} \PY{n}{get\PYZus{}traces}\PY{p}{(}\PY{n}{sack\PYZus{}drop\PYZus{}1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}229}]:} \PY{n}{total\PYZus{}pkts}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{pkts\PYZus{}src\PYZus{}dest}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{avg\PYZus{}delay}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{avg\PYZus{}rtt}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{total\PYZus{}through}\PY{p}{(}\PY{n}{traces\PYZus{}sack\PYZus{}drop\PYZus{}1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Total time simulation run :  4.992288
+Total number of packets recevied by destination node (node-4) :  281
+Packets per sec from node-3 to node-4 :  56.28681678621105
+Total Data passed from node-3 to node-4 :  292240
+Data per sec :  58538.28945765949
+Packets from source (node-0) to destination (node-4) :  281
+Packets/sec from source (node-0) to destination (node-4) :  56.28681678621105
+Data from source (node-0) to destination (node-4) :  292240
+Data/sec from source (node-0) to destination (node-4) :  58538.28945765949
+Average delay from source (node-0) to destination (node-1) :  0.12694204982206392
+Average Round Trip Time for a packet froms source (node-0) to destination (node-1) :  0.21873690980392155
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}230}]:} \PY{n}{plot}\PY{p}{(}\PY{n}{traces\PYZus{}sack\PYZus{}drop\PYZus{}1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_56_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{SACK 2-packets drop}\label{sack-2-packets-drop}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}231}]:} \PY{c+c1}{\PYZsh{} read the tahoe one packet drop trace}
+          \PY{n}{sack\PYZus{}drop\PYZus{}2} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./sack/pkt\PYZus{}drop\PYZus{}2/out.tr}\PY{l+s+s1}{\PYZsq{}}
+          \PY{n}{traces\PYZus{}sack\PYZus{}drop\PYZus{}2} \PY{o}{=} \PY{n}{get\PYZus{}traces}\PY{p}{(}\PY{n}{sack\PYZus{}drop\PYZus{}2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}232}]:} \PY{n}{total\PYZus{}pkts}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{pkts\PYZus{}src\PYZus{}dest}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{avg\PYZus{}delay}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{avg\PYZus{}rtt}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{total\PYZus{}through}\PY{p}{(}\PY{n}{traces\PYZus{}sack\PYZus{}drop\PYZus{}2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Total time simulation run :  4.996544
+Total number of packets recevied by destination node (node-4) :  269
+Packets per sec from node-3 to node-4 :  53.837212281128714
+Total Data passed from node-3 to node-4 :  279760
+Data per sec :  55990.700772373864
+Packets from source (node-0) to destination (node-4) :  269
+Packets/sec from source (node-0) to destination (node-4) :  53.837212281128714
+Data from source (node-0) to destination (node-4) :  279760
+Data/sec from source (node-0) to destination (node-4) :  55990.700772373864
+Average delay from source (node-0) to destination (node-1) :  0.12725762081784384
+Average Round Trip Time for a packet froms source (node-0) to destination (node-1) :  0.22016138842975194
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}233}]:} \PY{n}{plot}\PY{p}{(}\PY{n}{traces\PYZus{}sack\PYZus{}drop\PYZus{}2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_60_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{SACK 3-packets drop}\label{sack-3-packets-drop}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}234}]:} \PY{c+c1}{\PYZsh{} read the tahoe one packet drop trace}
+          \PY{n}{sack\PYZus{}drop\PYZus{}3} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./sack/pkt\PYZus{}drop\PYZus{}3/out.tr}\PY{l+s+s1}{\PYZsq{}}
+          \PY{n}{traces\PYZus{}sack\PYZus{}drop\PYZus{}3} \PY{o}{=} \PY{n}{get\PYZus{}traces}\PY{p}{(}\PY{n}{sack\PYZus{}drop\PYZus{}3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}235}]:} \PY{n}{total\PYZus{}pkts}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{pkts\PYZus{}src\PYZus{}dest}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{avg\PYZus{}delay}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{avg\PYZus{}rtt}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{n}{total\PYZus{}through}\PY{p}{(}\PY{n}{traces\PYZus{}sack\PYZus{}drop\PYZus{}3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Total time simulation run :  4.997432
+Total number of packets recevied by destination node (node-4) :  268
+Packets per sec from node-3 to node-4 :  53.62754310613931
+Total Data passed from node-3 to node-4 :  278720
+Data per sec :  55772.64483038489
+Packets from source (node-0) to destination (node-4) :  268
+Packets/sec from source (node-0) to destination (node-4) :  53.62754310613931
+Data from source (node-0) to destination (node-4) :  278720
+Data/sec from source (node-0) to destination (node-4) :  55772.64483038489
+Average delay from source (node-0) to destination (node-1) :  0.12755029850746258
+Average Round Trip Time for a packet froms source (node-0) to destination (node-1) :  0.2211333770491802
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}236}]:} \PY{n}{plot}\PY{p}{(}\PY{n}{traces\PYZus{}sack\PYZus{}drop\PYZus{}3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_64_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Summary}\label{summary}
+
+Tahoe shows degrading throughput for multiple packet drop.
+
+Reno shows better performance than Tahoe but it show bad performance in
+case of multiple packet lost
+
+New Reno recovers fast then Reno but in case of partial ACK it shows bad
+recovery.
+
+SACK performs better in case of partial ack
+
+    \subsubsection{Total Packets through}\label{total-packets-through}
+
+Below graph shows the number of packet through for 1-pkt drop, 2-pkt
+drop and 3-pkt drop scenarios.
+
+As can be seen, Reno does bad job in 2-pkt and 3-pkt drop scenario and
+sack is doing good for multiple packet lost or parital ack scenario
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}237}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{scnearios} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{scnearios}\PY{p}{,} \PY{n}{pkts\PYZus{}src\PYZus{}dest}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{green}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tahoe}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{scnearios}\PY{p}{,} \PY{n}{pkts\PYZus{}src\PYZus{}dest}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{new reno}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{scnearios}\PY{p}{,} \PY{n}{pkts\PYZus{}src\PYZus{}dest}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{reno}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{scnearios}\PY{p}{,} \PY{n}{pkts\PYZus{}src\PYZus{}dest}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sack}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{upper right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_67_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Average delay}\label{average-delay}
+
+Again as can be seen Reno is doing bad in case of partial ack or
+multiple packets drop. However SACK is doing good beacuse of pipe data
+structure in case of multiple packets drop, New Reno is also keeping
+well with SACK but lagged bit in cause of paritial ack.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}238}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{scnearios} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{scnearios}\PY{p}{,} \PY{n}{avg\PYZus{}delay}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{green}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tahoe}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{scnearios}\PY{p}{,} \PY{n}{avg\PYZus{}delay}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{new reno}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{scnearios}\PY{p}{,} \PY{n}{avg\PYZus{}delay}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{reno}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{scnearios}\PY{p}{,} \PY{n}{avg\PYZus{}delay}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sack}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{upper right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_69_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Average round trip time}\label{average-round-trip-time}
+
+SACK is doing good in case for 3-pkts drop. Reno is doing bad in average
+round trip time.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}239}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{scnearios} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{scnearios}\PY{p}{,} \PY{n}{avg\PYZus{}rtt}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{green}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tahoe}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{scnearios}\PY{p}{,} \PY{n}{avg\PYZus{}rtt}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{new reno}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{scnearios}\PY{p}{,} \PY{n}{avg\PYZus{}rtt}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{reno}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{scnearios}\PY{p}{,} \PY{n}{avg\PYZus{}rtt}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sack}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{upper right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_71_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    ref :
+http://user.it.uu.se/\textasciitilde{}perg/course/datakom2/it98/tcpsims\_lab.html
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
