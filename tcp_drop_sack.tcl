@@ -1,10 +1,4 @@
-################################################################################
-# File: tcp_drops.tcl
-# Authour: Ingela Anderton (ingela@docs.uu.se)
-# Created : 1998-04-07
-# Last modified: Time-stamp: <1998-04-07 16:42:57 ingela>
-# Description:
-################################################################################
+
 
 # Create a referense to the simulator class.
 set ns [new Simulator]
